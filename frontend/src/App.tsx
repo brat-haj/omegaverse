@@ -1,20 +1,19 @@
-import { useState } from 'react'
-
-import reactLogo from './assets/react.svg'
-
-import viteLogo from '/vite.svg'
-
-import pingApi from './utils/api/ping'
-
-import './App.css'
-
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import pingApi from './utils/api/ping';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   pingApi().then((result: Response) => {
     console.log(`Backend API is ${result.status === 200 ? 'up' : 'down'}`);
   });
+
+  const handleLogin = () => {
+    window.location.href = 'http://localhost:5000/auth/spotify/login';
+  };
 
   return (
     <>
@@ -28,18 +27,13 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+        <p>Edit <code>src/App.tsx</code> and save to test HMR</p>
+        <button onClick={handleLogin}>Login with Spotify</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

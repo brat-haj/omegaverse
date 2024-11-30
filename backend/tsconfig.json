@@ -7,6 +7,6 @@
         "strict": true,
         "esModuleInterop": true, 
         "resolveJsonModule": true, 
-        "types": ["node", "jest"]
+        "types": ["node", "jest", "express", "passport", "passport-spotify"]
     }
 }

@@ -1,4 +1,4 @@
-import ApiVersion from "../enum/apiVersion"
+import ApiVersion from "../interface/apiVersion"
 import jsonPackage from "../../package.json"
 
 /**

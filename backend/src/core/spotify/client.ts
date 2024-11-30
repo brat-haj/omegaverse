@@ -1,5 +1,9 @@
 import axios from "axios";
 
+/**
+ * Get the access token from Spotify
+ * @returns {string} - Returns the access token
+ */
 export const getAccessToken = async (): Promise<string> => {
     const clientId = process.env.SPOTIFY_CLIENT_ID!;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET!;

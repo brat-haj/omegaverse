@@ -1,15 +1,13 @@
 import axios from "axios";
 import { getAccessToken } from "./client"
+import TrackData from "../../interface/trackData";
 
-export default interface Track {
-    id: string;
-    name: string;
-    artists: string[];
-    album: string;
-    cover: string;
-}
-
-export const getTrackById = async (id: string): Promise<Track> => {
+/**
+ * Get the track by id
+ * @param {string} id - The id of the track
+ * @returns {Promise<TrackData>} - Returns the track
+ */
+export const getTrackById = async (id: string): Promise<TrackData> => {
     const response = await axios.get(`https://api.spotify.com/v1/tracks/${id}`, {
         headers: {
             Authorization: `Bearer ${await getAccessToken()}`   
@@ -22,6 +20,6 @@ export const getTrackById = async (id: string): Promise<Track> => {
         name: track.name,
         artists: track.artists.map((artist: any) => artist.name),
         album: track.album.name,
-        cover: track.album.images[0].url
+        cover: track.album.images[0].url,
     };
 }
