@@ -1,5 +1,4 @@
 import express, { Request, Response, Express } from "express";
-import packageJson from "./package.json";
 import index from "./src/routes";
 
 const app: Express = express();

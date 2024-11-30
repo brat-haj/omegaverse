@@ -1,0 +1,14 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "package.json": "<rootDir>/package.json"
+  },
+  "reporters": [
+    "default",
+    ["./node_modules/jest-html-reporter", {
+      "pageTitle": "OmegaVerse API Test Report",
+      "outputPath": "./report/report.html"
+    }]
+  ]
+}
