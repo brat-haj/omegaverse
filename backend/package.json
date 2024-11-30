@@ -24,6 +24,9 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "@types/express-session": "^1.18.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-spotify": "^2.0.4",
     "axios": "^1.7.8",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
