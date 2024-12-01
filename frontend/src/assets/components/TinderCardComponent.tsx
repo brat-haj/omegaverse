@@ -15,12 +15,14 @@ class MusicTitle {
     }
 
     onCardLeftScreen(direction: string) {
+        console.log(this);
         console.log(this.name + " left the screen to the " + direction);
     }
 }
 
 function TinderCardComponent() {
-    const [musicList, setMusicList] = useState<MusicTitle[]>([]);
+    const [trackList, setMusicList] = useState<MusicTitle[]>([]);
+    const currentTrack = useState<MusicTitle>(trackList[0]);
 
     useEffect(() => {
         const fetchMusicList = async () => {
@@ -30,7 +32,7 @@ function TinderCardComponent() {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setMusicList(data.musicList);
+                    setMusicList(data.trackList);
                 } else {
                     console.error("Failed to fetch music list");
                 }
@@ -66,28 +68,27 @@ function TinderCardComponent() {
 
     return (
         <div>
-            <h1 className="bg-red-700">Music Recommendation</h1>
-            <div className="flex flex-col items-center gap-8 py-8">
-                {musicList.map((music) => (
+            <h1>Music Recommendation</h1>
+            <div className="flex flex-col items-center gap-8 py-8 overflow-hidden">
+                
                     <TinderCard
-                        key={music.name}
+                        key={currentTrack.name}
                         preventSwipe={["up", "down"]}
                         flickOnSwipe={true}
-                        onCardLeftScreen={music.onCardLeftScreen}
+                        onCardLeftScreen={currentTrack.onCardLeftScreen}
                     >
                         <div className="p-4 rounded-xl bg-gray-800 flex flex-col gap-2 select-none max-w-sm">
                             <img
                                 draggable="false"
                                 className="rounded"
-                                src={music.cover}
-                                alt={music.name}
+                                src={currentTrack.cover}
+                                alt={currentTrack.name}
                             />
                             <h2 className="text-center">
-                                {music.name} - {music.artist}
+                                {currentTrack.name} - {currentTrack.artist}
                             </h2>
                         </div>
                     </TinderCard>
-                ))}
             </div>
         </div>
     );
