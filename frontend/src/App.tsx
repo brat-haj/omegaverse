@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import TinderCardComponent from "./assets/components/TinderCardComponent";
 
 function App() {
     const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -27,7 +28,10 @@ function App() {
         <div>
             <h1 className="bg-red-700">Spotify Authentication</h1>
             {accessToken ? (
-                <p>Access Token: {accessToken}</p>
+                <>
+                    <p>Access Token: {accessToken}</p>
+                    <TinderCardComponent />
+                </>
             ) : (
                 <>
                     <p>Not authenticated</p>
