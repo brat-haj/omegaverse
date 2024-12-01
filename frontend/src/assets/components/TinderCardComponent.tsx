@@ -21,8 +21,27 @@ class MusicTitle {
 }
 
 function TinderCardComponent() {
-    const [trackList, setMusicList] = useState<MusicTitle[]>([]);
-    const currentTrack = useState<MusicTitle>(trackList[0]);
+    const [trackList, setTrackList] = useState<MusicTitle[]>([
+        new MusicTitle(
+            "360",
+            "charli xcx",
+            "https://open.spotify.com/track/1",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
+        ),
+        new MusicTitle(
+            "Apple",
+            "charli xcx",
+            "https://open.spotify.com/track/1",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
+        ),
+        new MusicTitle(
+            "Von Dutch",
+            "charli xcx",
+            "https://open.spotify.com/track/1",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
+        ),
+    ]);
+    const [currentTrack] = useState<MusicTitle>(trackList[0]);
 
     useEffect(() => {
         const fetchMusicList = async () => {
@@ -32,7 +51,7 @@ function TinderCardComponent() {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setMusicList(data.trackList);
+                    setTrackList(data.trackList);
                 } else {
                     console.error("Failed to fetch music list");
                 }
@@ -42,35 +61,13 @@ function TinderCardComponent() {
         };
 
         fetchMusicList();
-
-        // Add dummy music
-        setMusicList([
-            new MusicTitle(
-                "360",
-                "charli xcx",
-                "https://open.spotify.com/track/1",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
-            ),
-            new MusicTitle(
-                "Apple",
-                "charli xcx",
-                "https://open.spotify.com/track/1",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
-            ),
-            new MusicTitle(
-                "Von Dutch",
-                "charli xcx",
-                "https://open.spotify.com/track/1",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
-            ),
-        ]);
     }, []);
 
     return (
         <div>
             <h1>Music Recommendation</h1>
             <div className="flex flex-col items-center gap-8 py-8 overflow-hidden">
-                
+                {currentTrack && (
                     <TinderCard
                         key={currentTrack.name}
                         preventSwipe={["up", "down"]}
@@ -89,6 +86,7 @@ function TinderCardComponent() {
                             </h2>
                         </div>
                     </TinderCard>
+                )}
             </div>
         </div>
     );
