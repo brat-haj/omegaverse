@@ -33,6 +33,7 @@ router.get(
       "user-read-private",
       "user-library-modify",
       "user-library-read",
+      "user-top-read",
       "playlist-modify-public"
     ],
   })

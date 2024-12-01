@@ -2,7 +2,8 @@ import express, { Request, Response, Express } from "express";
 import session from "express-session";
 import passport from "passport";
 import index from "./src/routes";
-import { trackById } from "./src/routes/track";
+import track from "./src/routes/track";
+import recommendations from "./src/routes/recommendations";
 import spotifyAuth from "./src/auth/spotify";
 
 const app: Express = express();
@@ -25,10 +26,19 @@ app.get("/", async (req: Request, res: Response) => {
 
 app.get("/track/:id", async (req: Request, res: Response) => {
   try {
-    const result = await trackById(req.params.id);
+    const result = await track(req.params.id);
     res.send(result);
   } catch (error: any) {
     console.log(error);
+    res.status(500).send(error.message);
+  }
+});
+
+app.get("/recommendations/:token", async (req: Request, res: Response) => {
+  try {
+    const result = await recommendations(req.params.token);
+    res.send(result);
+  } catch (error: any) {
     res.status(500).send(error.message);
   }
 });
