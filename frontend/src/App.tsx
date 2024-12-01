@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div>
-      <h1>Spotify Authentication</h1>
+      <h1 className='bg-red-700'>Spotify Authentication</h1>
       {accessToken ? (
         <p>Access Token: {accessToken}</p>
       ) : (
