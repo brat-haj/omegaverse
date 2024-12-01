@@ -1,0 +1,7 @@
+curl -X GET "https://api.spotify.com/v1/search?q=artist:Andrew%20Prahlow%20track:See%20You%20Soon" \
+    -H "Accept: application/json, text/plain, */*" \
+    -H "Authorization: Bearer BQDIZvhP-WYcx1Sxy5x2IKLWwpZPYfnZNJ9luyOI-QfX7gaXekHmYvU6QnrtaNnAAptQ05fVHywbHwWLJ5fPrStFz4POzmeP89QIpXnQZSBFUnPr7YvU7uSiZqYaHgevsXdbX2ofMYQ3ZQW-lnNSHh1Slh7bIXftc9RHnaw0Zq3VXWIO8JDSsLnZtd9jHeUujE3xMCH76qnUkpiF_XqX0h5tWY0lgClAbSc-LnGHW81OiFoh3pDbffYBSzskWTzZbCd1NsMqrDEEJiPeeal8TQ" \
+    -H "User-Agent: axios/1.7.8" \
+    -H "Accept-Encoding: gzip, compress, deflate, br" \
+    -H "Host: api.spotify.com" \
+    -H "Connection: keep-alive"
