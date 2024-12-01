@@ -7,7 +7,7 @@ function App() {
     const fetchToken = async () => {
       try {
         const response = await fetch('/api/auth/spotify/token', {
-          credentials: 'include', // Include cookies in the request
+          credentials: 'include', 
         });
         if (response.ok) {
           const data = await response.json();
