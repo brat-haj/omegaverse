@@ -46,7 +46,7 @@ function TinderCardComponent() {
     useEffect(() => {
         const fetchMusicList = async () => {
             try {
-                const response = await fetch("/api/recommandation", {
+                const response = await fetch("/api/recommendations", {
                     credentials: "include",
                 });
                 if (response.ok) {
