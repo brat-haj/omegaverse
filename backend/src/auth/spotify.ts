@@ -34,7 +34,8 @@ router.get(
       "user-library-modify",
       "user-library-read",
       "user-top-read",
-      "playlist-modify-public"
+      "playlist-modify-public",
+      "playlist-modify-private"
     ],
   })
 );
@@ -61,6 +62,14 @@ router.get("/logout", (req: Request, res: Response, next: NextFunction) => {
 router.get("/token", (req: any, res: Response) => {
   if (req.session.accessToken) {
     res.json({ accessToken: req.session.accessToken });
+  } else {
+    res.status(401).json({ error: "Not authenticated" });
+  }
+});
+
+router.get("/me", (req: any, res: Response) => {  
+  if (req.isAuthenticated()) {
+    res.json({ user: req.user.id });
   } else {
     res.status(401).json({ error: "Not authenticated" });
   }

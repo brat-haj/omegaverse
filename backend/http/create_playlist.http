@@ -1,0 +1,3 @@
+curl -X POST http://localhost:5000/playlist \
+    -H "Content-Type: application/json" \
+    -d '{"accessToken":"BQCZWSZfAV-uU3FtThP-Yp4_YLvCGvDl2S7TiP1z0NNTYjMDTr799oj7G_r_py4z7TJFuhpEghYCB7_4_Qk2uRaodySircelKsoRIP2oo-OvLtMXIcTmGlaBR7GV11ctRYvHkQOGD92aGniMLHOUUq0061-VN9bGFYodGYpALNgEDINmPrW8jR1NFtOsHLLHrp8KztjOrYSPv8Frag2MV-4QJvXlkUZA2xEmrYAYNQ0U1swWMFE5Z7A4XT-ZfGG3piZsGqfPtQbWVJLYcSzrmIvJLDWFqHNv9VDAzvW5B7iGouAF1wU","userId":"kvgwdaa7fq44jckzo85ulaen2","playlistName":"OmegaVerse"}'

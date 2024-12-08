@@ -5,6 +5,8 @@ import index from "./src/routes";
 import track from "./src/routes/track";
 import recommendations from "./src/routes/recommendations";
 import spotifyAuth from "./src/auth/spotify";
+import preview from "./src/routes/preview";
+import { createPlaylist, addToPlaylist} from "./src/core/spotify/playlist";
 
 const app: Express = express();
 const port: number = 5000;
@@ -12,6 +14,9 @@ const port: number = 5000;
 app.use(session({ secret: "your_secret_key", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(express.json());
+
 
 app.use("/auth/spotify", spotifyAuth);
 
@@ -37,6 +42,28 @@ app.get("/track/:id", async (req: Request, res: Response) => {
 app.get("/recommendations/:token", async (req: Request, res: Response) => {
   try {
     const result = await recommendations(req.params.token);
+    res.send(result);
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.get("/preview/:trackName/:artistName", async (req: Request, res: Response) => {
+  try {
+    console.log(req.body);
+    const result = await preview(req.params.trackName, req.params.artistName);
+    res.send(result);
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.post("/playlist", async (req: Request, res: Response) => {
+  
+  console.log(req.body);
+
+  try {
+    const result = await createPlaylist(req.body.accessToken, req.body.userId, req.body.playlistName);
     res.send(result);
   } catch (error: any) {
     res.status(500).send(error.message);
