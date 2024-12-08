@@ -1,5 +1,6 @@
 /**
  * ApiVersion interface
+ * @interface
  * @param {string} version - The version of the API
  * @param {string} versionName - The name of the version of the API
  */
