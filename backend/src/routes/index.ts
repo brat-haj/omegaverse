@@ -1,15 +1,31 @@
-import ApiVersion from "../interface/apiVersion"
-import jsonPackage from "../../package.json"
+import ApiVersion from '../interface/apiVersion';
+import jsonPackage from '../../package.json';
 
 /**
- * Behavior for the index route
- * @returns {ApiVersion} - Returns the version of the API
+ * @swagger
+ * /:
+ *   get:
+ *     tags: [API]
+ *     summary: Get API version
+ *     description: Returns the version of the API
+ *     responses:
+ *       200:
+ *         description: A successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 version:
+ *                   type: string
+ *                 versionName:
+ *                   type: string
  */
 const index = async (): Promise<ApiVersion> => {
-    return {
-        version: jsonPackage.version,
-        versionName: jsonPackage.versionName
-    }
-}
+  return {
+    version: jsonPackage.version,
+    versionName: jsonPackage.versionName,
+  };
+};
 
 export default index;
