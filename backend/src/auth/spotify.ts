@@ -23,6 +23,17 @@ passport.use(
   )
 );
 
+/**
+ * @swagger
+ * tags:
+ *   name: SpotifyAuth
+ *   description: Endpoints for Spotify authentication
+ */
+
+/**
+ * Express router to handle Spotify authentication routes.
+ * @module auth/spotify
+ */
 const router = express.Router();
 
 router.get(
@@ -34,7 +45,8 @@ router.get(
       "user-library-modify",
       "user-library-read",
       "user-top-read",
-      "playlist-modify-public"
+      "playlist-modify-public",
+      "playlist-modify-private"
     ],
   })
 );
@@ -49,6 +61,20 @@ router.get(
   }
 );
 
+/**
+ * @swagger
+ * /auth/spotify/logout:
+ *   get:
+ *     summary: Log out the user
+ *     tags: [SpotifyAuth]
+ *     responses:
+ *       200:
+ *         description: User logged out
+ *       401:
+ *         description: Not authenticated
+ *       500:
+ *         description: Internal server error
+ */
 router.get("/logout", (req: Request, res: Response, next: NextFunction) => {
   req.logout((err) => {
     if (err) {
@@ -58,9 +84,55 @@ router.get("/logout", (req: Request, res: Response, next: NextFunction) => {
   });
 });
 
+/**
+ * @swagger
+ * /auth/spotify/token:
+ *   get:
+ *     summary: Get the access token
+ *     tags: [SpotifyAuth]
+ *     responses:
+ *       200:
+ *         description: Access token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 accessToken:
+ *                   type: string
+ *       401:
+ *         description: Not authenticated
+ */
 router.get("/token", (req: any, res: Response) => {
   if (req.session.accessToken) {
     res.json({ accessToken: req.session.accessToken });
+  } else {
+    res.status(401).json({ error: "Not authenticated" });
+  }
+});
+
+/**
+ * @swagger
+ * /auth/spotify/me:
+ *   get:
+ *     summary: Get the user's profile
+ *     tags: [SpotifyAuth]
+ *     responses:
+ *       200:
+ *         description: User profile's ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: string
+ *       401:
+ *         description: Not authenticated
+ */
+router.get("/me", (req: any, res: Response) => {  
+  if (req.isAuthenticated()) {
+    res.json({ user: req.user.id });
   } else {
     res.status(401).json({ error: "Not authenticated" });
   }
