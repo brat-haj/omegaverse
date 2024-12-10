@@ -13,6 +13,7 @@ function App() {
                 if (response.ok) {
                     const data = await response.json();
                     setAccessToken(data.accessToken);
+                    localStorage.setItem("accessToken", data.accessToken);
                 } else {
                     console.error("Failed to fetch access token");
                 }

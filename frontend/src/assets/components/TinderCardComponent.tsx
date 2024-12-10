@@ -21,7 +21,7 @@ class MusicTitle {
 }
 
 function TinderCardComponent() {
-    const [trackList, setTrackList] = useState<MusicTitle[]>([
+    const trackList = useState<MusicTitle[]>([
         new MusicTitle(
             "360",
             "charli xcx",
@@ -41,14 +41,30 @@ function TinderCardComponent() {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
         ),
     ]);
-    const [currentTrack] = useState<MusicTitle>(trackList[0]);
+    const setTrackList = (data: string) => {
+        // Parse JSON file
+        console.log(data);
+    };
+
+    const [currentTrack] = useState<MusicTitle>(
+        new MusicTitle(
+            "Von Dutch",
+            "charli xcx",
+            "https://open.spotify.com/track/1",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/800px-Charli_XCX_-_Brat_%28album_cover%29.png"
+        )
+    );
 
     useEffect(() => {
         const fetchMusicList = async () => {
             try {
-                const response = await fetch("/api/recommendations", {
-                    credentials: "include",
-                });
+                const response = await fetch(
+                    "/api/recommendations/" +
+                        localStorage.getItem("accessToken"),
+                    {
+                        credentials: "include",
+                    }
+                );
                 if (response.ok) {
                     const data = await response.json();
                     setTrackList(data.trackList);
